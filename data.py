@@ -13,7 +13,6 @@ label_font = FontProperties(fname=path_font, size=28)
 x = [0,0.1,0.3,0.5,1.0]
 y = []
 stds = []
-print('reading')
 with open('results/data.csv', 'r', encoding='utf-8') as file:
     rows = csv.reader(file)
     for row in zip(*rows):
@@ -32,11 +31,13 @@ plt.xlabel('食鹽水重量百分比濃度(%)', fontproperties=label_font)
 plt.ylabel('綠豆大小(平方公分)', fontproperties=label_font)
 
 for x1, y1 in zip(x, y):
-    if x1 < 1:
-        x1 += 0.005
+    print(x1, y1)
+    posX, posY = x1, y1
+    if posX < 1:
+        posX += 0.005
     else:
-        x1 = 0.93
-    y1 += 0.02
-    plt.text(x1, y1, round(y1, 3), fontproperties=tick_font)
+        posX = 0.93
+    posY += 0.02
+    plt.text(posX, posY, f'{y1:.3f}', fontproperties=tick_font)
 
 plt.savefig('results/line_chart.jpg')
